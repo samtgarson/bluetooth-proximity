@@ -24,7 +24,7 @@ class BluetoothRSSI(object):
             "6sB17s", bt.str2ba(self.addr), bt.ACL_LINK, b"\0" * 17)
         request = array.array("H", reqstr)
         handle = fcntl.ioctl(self.hci_fd, bt.HCIGETCONNINFO, request, 1)
-        handle = struct.unpack("8xH14x", request.tostring())[0]
+        handle = struct.unpack("8xH14x", request.tobytes())[0]
         self.cmd_pkt = struct.pack('H', handle)
 
     def connect(self):
